@@ -7,3 +7,4 @@ if działanie == "dodawanie":
     print("wynik dodawania to:", int(liczbax) + int(liczbay))
 elif działanie == "odejmowanie":
     print("wynik odejmowania to:", int(liczbax) - int(liczbay))
+print("test")
