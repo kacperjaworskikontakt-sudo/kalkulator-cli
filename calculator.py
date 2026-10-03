@@ -1,29 +1,45 @@
-print("Moj kalkulator")
-while True:
-    liczbax = input("podaj liczbe x:")
-    liczbay = input("podaj liczbe y:")
-    try:
-        int(liczbax)
-        int(liczbay)
-    except ValueError:
-        print("Nastepnym razem podaj prawidłowe liczby")
-        exit()
-    print("wybierz działanie: dodawanie, odejmowanie, mnożenie, dzielenie")
-    działanie = input("wybierz działanie:") 
-    działanie = działanie.lower().strip()
-    if działanie == "dodawanie":
-        print("wynik dodawania to:", int(liczbax) + int(liczbay))
-    elif działanie == "odejmowanie":
-        print("wynik odejmowania to:", int(liczbax) - int(liczbay))
-    elif działanie == "mnożenie":
-        print("wynik mnożenie to:", int(liczbax) * int(liczbay))
-    elif działanie == "dzielenie":
-        if int(liczbay) == 0:
-            print("Nie można dzielić przez 0")
-        else:
-            print("wynik dzielenia to", int(liczbax) / int(liczbay))
-    else:
-        print("Nieprawidłowe działanie")
-    print("Czy chcesz kontynuować? (tak/nie)")
-    if input().lower().strip() != "tak":
-        break
+class Kalkulator:
+    def __init__(self):
+        pass
+
+    def liczby(self):
+        a = input("Podaj pierwsza liczbe")
+        b = input("Podaj druga liczbe")
+        return a, b
+
+    
+    def sprawdz(self, a, b):
+        try:
+            a = float(a)
+            b = float(b)
+            return a, b
+        except ValueError: 
+            print("Następnym razem podaj prawidłowe liczby")
+            exit()
+    
+    def dodawanie(self, a, b):
+        return(a + b)
+
+    def odejmowanie(self, a, b):
+        return(a - b)
+
+    def mnożenie(self, a, b):
+        return(a * b)
+
+    def dzielenie(self, a, b):
+        return(a/b)
+
+    def procenty(self):
+        pass
+
+    def potega(self):
+        pass
+
+kalkulator = Kalkulator()
+
+a, b = kalkulator.liczby()
+a, b = kalkulator.sprawdz(a, b)
+
+wynik = kalkulator.dodawanie(a, b)
+
+print(wynik)
