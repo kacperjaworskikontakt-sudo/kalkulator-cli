@@ -1,45 +1,50 @@
 class Kalkulator:
     def __init__(self):
-        pass
+        self.history = []
 
-    def liczby(self):
-        a = input("Podaj pierwsza liczbe")
-        b = input("Podaj druga liczbe")
-        return a, b
-
-    
-    def sprawdz(self, a, b):
-        try:
-            a = float(a)
-            b = float(b)
-            return a, b
-        except ValueError: 
-            print("Następnym razem podaj prawidłowe liczby")
-            exit()
-    
     def dodawanie(self, a, b):
-        return(a + b)
+        result = a + b
+
+        calculation = f"{a} + {b} = {result}"
+        self.history.append(calculation)
+        return result
 
     def odejmowanie(self, a, b):
-        return(a - b)
+        result = a - b
+
+        calculation = f"{a} - {b} = {result}"
+        self.history.append(calculation)
+        return result 
 
     def mnożenie(self, a, b):
-        return(a * b)
+        result = a * b
+    
+        calculation = f"{a} * {b} = {result}"
+        self.history.append(calculation)
+        return result 
 
     def dzielenie(self, a, b):
-        return(a/b)
+        try:
+            result = a / b
+        except ValueError:
+            print("Nastepnym razem podaj prawidłowe liczby")
+        calculation = f"{a} / {b} = {result}"
+        self.history.append(calculation)
+        return result
 
-    def procenty(self):
-        pass
 
-    def potega(self):
-        pass
+    def pokaz_historie(self):
+        for calculation in self.history:
+            print(calculation)
 
-kalkulator = Kalkulator()
 
-a, b = kalkulator.liczby()
-a, b = kalkulator.sprawdz(a, b)
+kalkulator = Kalkulator() 
 
-wynik = kalkulator.dodawanie(a, b)
+kalkulator.dodawanie(5, 3)
+kalkulator.dodawanie(2, 10)
 
-print(wynik)
+kalkulator.pokaz_historie()
+print(kalkulator.history)
+
+
+        
