@@ -1,50 +1,79 @@
 class Kalkulator:
-    def __init__(self):
+#zrobić historie zapisywana w innym pliku txt i dodać moduły math, statistics
+#dodac tryby naukowwe
+
+    def start(self):
+        #otwiera/czysci plik historia.txt, wywoluje wybor
         self.history = []
+        open("historia.txt", "w", encoding="utf-8").close()
+        self.wybor()
+
+    def wybor(self):
+        #zaczyna, pyta o licze i wywoluje działanie
+        a = int(input("Podaj a:"))
+        b = int(input("Podaj b:"))
+        #poprawic eeror 
+        t = int(input("Dodawanie[1]\nOdejmowanie[2]\nmnożenie[3]\ndzielenie[4]\nWybierz operacje:"))
+        if t == 1:
+            return self.dodawanie(a, b)
+        elif t == 2:
+            return self.odejmowanie(a, b)
+        elif t == 3:
+            return self.mnozenie(a, b)
+        elif t == 4:
+            return self.dzielenie(a, b)
+        else:
+            print("Następnym razem wybierz prawidłowe działanie")
 
     def dodawanie(self, a, b):
         result = a + b
 
         calculation = f"{a} + {b} = {result}"
         self.history.append(calculation)
-        return result
+        self.pokaz_historie()
 
     def odejmowanie(self, a, b):
         result = a - b
 
         calculation = f"{a} - {b} = {result}"
         self.history.append(calculation)
-        return result 
+        self.pokaz_historie()
 
-    def mnożenie(self, a, b):
+    def mnozenie(self, a, b):
         result = a * b
     
         calculation = f"{a} * {b} = {result}"
         self.history.append(calculation)
-        return result 
+        self.pokaz_historie() 
 
     def dzielenie(self, a, b):
-        try:
-            result = a / b
-        except ValueError:
+        if b == 0:
             print("Nastepnym razem podaj prawidłowe liczby")
-        calculation = f"{a} / {b} = {result}"
-        self.history.append(calculation)
-        return result
+        else:
+            result = a / b 
+            calculation = f"{a} / {b} = {result}"
+            self.history.append(calculation)
+            self.pokaz_historie()
 
-
+#skonczyc historie pisana do pliku 
     def pokaz_historie(self):
         for calculation in self.history:
-            print(calculation)
+            print(calculation) 
+        with open("historia.txt", "a", encoding="utf-8") as plik:
+            plik.write(f"{calculation}\n")
+
+        self.petla()
+
+    def petla(self):
+        q = int(input("Czy chcesz kontunuować?\nTak[1]/Nie[2]:"))
+        if q == 1:
+            self.wybor()
+        else:
+            with open("historia.txt", "r", encoding="utf-8") as plik:
+                print(plik.read())
+
 
 
 kalkulator = Kalkulator() 
-
-kalkulator.dodawanie(5, 3)
-kalkulator.dodawanie(2, 10)
-
-kalkulator.pokaz_historie()
-print(kalkulator.history)
-
-
-        
+#wywołuje start, zaczyna program
+kalkulator.start()
