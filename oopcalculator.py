@@ -9,7 +9,7 @@ class Kalkulator:
     def start(self):
         #otwiera/czysci plik historia.txt, wywoluje wybor
         self.history = []
-        open("historia.txt", "w", encoding="utf-8").close()
+        open("historia.txt", "a", encoding="utf-8").close()
         self.menu()
 
     def menu(self):
@@ -27,26 +27,36 @@ class Kalkulator:
             self.menu()
             return
         if t == 1:
-            self.wybor()
+            self.podstawowy()
         elif t == 2:
-            pass
+            self.naukowy()
         elif t == 3:
-            pass
+            self.statystyki()
         elif t == 4:
-            pass
+            self.historia()
+            return
         else:
-            pass
+            self.menu()
+            return
+#zrobic naukowy i statystyczny 
+    def naukowy(self):
+        pass
 
+    def statystyki(self):
+        pass
+    
+    def historia(self):
+        with open("historia.txt", "r", encoding="utf-8") as plik:
+                print(plik.read())
 
-
-    def wybor(self):
+    def podstawowy(self):
         #zaczyna, pyta o licze i wywoluje działanie
         try:
             a = int(input("Podaj a:"))
             b = int(input("Podaj b:"))
         except:
             print("Podaj prawidłowe liczby")
-            self.wybor()
+            self.podstawowy()
             return
         
         t = int(input("Dodawanie[1]\nOdejmowanie[2]\nmnożenie[3]\ndzielenie[4]\nWybierz operacje:"))
@@ -92,10 +102,9 @@ class Kalkulator:
             self.pokaz_historie()
  
     def pokaz_historie(self):
-        for calculation in self.history:
-            print(calculation) 
+        print(self.history[-1])
         with open("historia.txt", "a", encoding="utf-8") as plik:
-            plik.write(f"{calculation}\n")
+            plik.write(f"{self.history[-1]}")
 
         self.petla()
 
@@ -106,10 +115,10 @@ class Kalkulator:
             print("Zdecyduj się")
             self.petla()
         if q == 1:
-            self.wybor()
+            self.podstawowy()
         else:
-            with open("historia.txt", "r", encoding="utf-8") as plik:
-                print(plik.read())
+            for calculation in self.history:
+                print(calculation)
             return 
 
 
