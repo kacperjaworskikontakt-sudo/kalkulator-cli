@@ -40,15 +40,79 @@ class Kalkulator:
             return
 #zrobic naukowy i statystyczny 
     def naukowy(self):
+        try:
+            a = int(input("Podaj a:"))
+            b = int(input("Podaj b:"))
+        except:
+            print("Podaj prawidłowe liczby")
+            self.naukowy()
+            return
+        
+        t = int(input("Pierwiastek[1]\nPotęga[2]\nSilnia[3]\nWybierz operacje:"))
+        if t == 1:
+            return self.pierwiastek(a, b)
+        elif t == 2:
+            return self.potega(a, b)
+        elif t == 3:
+            return self.silnia(a, b)
+        else:
+            print("Następnym razem wybierz prawidłowe działanie")
+
+    def pierwiastek(self, a, b):
         pass
 
+    def potega(self, a, b):
+        result = a ** b
+    
+        calculation = f"{a} ** {b} = {result}"
+        self.history.append(calculation)
+        self.pokaz_historie() 
+
+    def silnia(self, a, b):
+        pass
+    
     def statystyki(self):
+        try:
+            a = int(input("Podaj a:"))
+            b = int(input("Podaj b:"))
+        except:
+            print("Podaj prawidłowe liczby")
+            self.statystyki()
+            return
+        
+        t = int(input("Średnia[1]\nMediania[2]\nDominanta[3]\nOdchylenie standardowe[4]\nWybierz operacje:"))
+        if t == 1:
+            return self.srednia(a, b)
+        elif t == 2:
+            return self.mediana(a, b)
+        elif t == 3:
+            return self.dominanta(a, b)
+        elif t == 4:
+            return self.odchylenie(a, b)
+        else:
+            print("Następnym razem wybierz prawidłowe działanie")
+
+    def srednia(self, a, b):
+        result = (a + b)/2
+
+        calculation = f"({a} + {b})/2 = {result}"
+        self.history.append(calculation)
+        self.pokaz_historie()
+        pass
+
+    def mediana(self, a, b):
+        pass
+
+    def dominanta(self, a, b):
+        pass
+
+    def odchylenie(self, a, b):
         pass
     
     def historia(self):
         with open("historia.txt", "r", encoding="utf-8") as plik:
                 print(plik.read())
-
+ 
     def podstawowy(self):
         #zaczyna, pyta o licze i wywoluje działanie
         try:
@@ -104,7 +168,7 @@ class Kalkulator:
     def pokaz_historie(self):
         print(self.history[-1])
         with open("historia.txt", "a", encoding="utf-8") as plik:
-            plik.write(f"{self.history[-1]}")
+            plik.write(f"{self.history[-1]}\n")
 
         self.petla()
 
