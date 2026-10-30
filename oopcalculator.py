@@ -1,24 +1,21 @@
+lazy import math
+lazy import statistics
+
 class Kalkulator:
-#dodac tryby naukowwe dodać moduły math, statistics
-#zrobic takie menu:
-#[1] Podstawowy — dodawanie, odejmowanie, mnożenie, dzielenie.
-#[2] Naukowy — pierwiastki, potęgi, silnia, logarytmy i trygonometria.
-#[3] Statystyczny — średnia, mediana, dominanta i odchylenie standardowe.
-#[4] Historia — wyświetlanie wcześniejszych obliczeń zapisanych w pliku.
 
     def start(self):
         #otwiera/czysci plik historia.txt, wywoluje wybor
         self.history = []
         open("historia.txt", "a", encoding="utf-8").close()
+        print("-----------Kalkulator-----------")
         self.menu()
 
     def menu(self):
-        #skonczyc menu
-        print("-----------Kalkulator-----------")
+
         print("""   Menu:
         [1] Podstawowy — dodawanie, odejmowanie, mn ożenie, dzielenie.
         [2] Naukowy — pierwiastki, potęgi, silnia, logarytmy i trygonometria.
-        [3] Statystyczny — średnia, mediana, dominanta i odchylenie standardowe.
+        [3] Statystyczny — średnia, mediana, dominanta.
         [4] Historia — wyświetlanie wcześniejszych obliczeń zapisanych w pliku.
         """)
         try:
@@ -38,7 +35,7 @@ class Kalkulator:
         else:
             self.menu()
             return
-#zrobic naukowy i statystyczny 
+
     def naukowy(self):
         try:
             a = int(input("Podaj a:"))
@@ -59,7 +56,12 @@ class Kalkulator:
             print("Następnym razem wybierz prawidłowe działanie")
 
     def pierwiastek(self, a, b):
-        pass
+        result = math.sqrt(a), math.sqrt(b)
+
+    
+        calculation = f"√{a},  √{b} = {result}"
+        self.history.append(calculation)
+        self.pokaz_historie()
 
     def potega(self, a, b):
         result = a ** b
@@ -69,8 +71,12 @@ class Kalkulator:
         self.pokaz_historie() 
 
     def silnia(self, a, b):
-        pass
+        result = math.factorial(a), math.factorial(b)
     
+        calculation = f"!{a}, !{b} = {result}"
+        self.history.append(calculation)
+        self.pokaz_historie() 
+
     def statystyki(self):
         try:
             a = int(input("Podaj a:"))
@@ -87,8 +93,6 @@ class Kalkulator:
             return self.mediana(a, b)
         elif t == 3:
             return self.dominanta(a, b)
-        elif t == 4:
-            return self.odchylenie(a, b)
         else:
             print("Następnym razem wybierz prawidłowe działanie")
 
@@ -101,14 +105,21 @@ class Kalkulator:
         pass
 
     def mediana(self, a, b):
-        pass
+        liczby = [a, b] 
+        result = statistics.median(liczby)
+    
+        calculation = f"mediana {a} oraz {b} to {result}"
+        self.history.append(calculation)
+        self.pokaz_historie() 
 
     def dominanta(self, a, b):
-        pass
-
-    def odchylenie(self, a, b):
-        pass
+        liczby = [a, b] 
+        result = statistics.mode(liczby)
     
+        calculation = f"dominanta {a} oraz {b} to {result}"
+        self.history.append(calculation)
+        self.pokaz_historie() 
+
     def historia(self):
         with open("historia.txt", "r", encoding="utf-8") as plik:
                 print(plik.read())
@@ -179,7 +190,7 @@ class Kalkulator:
             print("Zdecyduj się")
             self.petla()
         if q == 1:
-            self.podstawowy()
+            self.menu()
         else:
             for calculation in self.history:
                 print(calculation)
